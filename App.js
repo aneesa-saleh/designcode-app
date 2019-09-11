@@ -1,7 +1,8 @@
 import React from 'react';
-import { ScrollView } from 'react-native';
+import { ScrollView, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
 import Card from './components/card';
+import { Ionicons } from '@expo/vector-icons';
 
 import cardBackround from './assets/background2.jpg';
 import reactLogo from './assets/logo-react.png';
@@ -10,33 +11,46 @@ import avatar from './assets/avatar.jpg';
 export default function App() {
   return (
     <Container>
-      <ScrollView>
-        <TitleBar>
-          <Avatar source={avatar} />
-          <Title>Welcome back</Title>
-          <Name>Mengi</Name>
-        </TitleBar>
-        <Subtitle>Continue Learning</Subtitle>
-        <CardWrapper horizontal showsHorizontalScrollIndicator={false}>
-          <Card
-            title="Styled Components"
-            image={cardBackround}
-            caption="React Native"
-            logo={reactLogo}
-            subtitle="5 of 12 sections"
-          />
-          <Card
-            title="Styled Components"
-            image={cardBackround}
-            caption="React Native"
-            logo={reactLogo}
-            subtitle="5 of 12 sections"
-          />
-        </CardWrapper>
-      </ScrollView>
+      <SafeAreaView>
+        <ScrollView>
+          <TitleBar>
+            <Avatar source={avatar} />
+            <Title>Welcome back</Title>
+            <Name>Mengi</Name>
+            <NotificationsIcon
+              name="ios-notifications"
+              size={32}
+              color="#4775f2"
+            />
+          </TitleBar>
+          <Subtitle>Continue Learning</Subtitle>
+          <CardWrapper horizontal showsHorizontalScrollIndicator={false}>
+            <Card
+              title="Styled Components"
+              image={cardBackround}
+              caption="React Native"
+              logo={reactLogo}
+              subtitle="5 of 12 sections"
+            />
+            <Card
+              title="Styled Components"
+              image={cardBackround}
+              caption="React Native"
+              logo={reactLogo}
+              subtitle="5 of 12 sections"
+            />
+          </CardWrapper>
+        </ScrollView>
+      </SafeAreaView>
     </Container>
   );
 }
+
+const NotificationsIcon = styled(Ionicons)`
+  position: absolute;
+  right: 20px;
+  top: 5px;
+`;
 
 const CardWrapper = styled.ScrollView`
   padding-bottom: 30px;
