@@ -1,30 +1,46 @@
 import React from 'react';
-import { Text } from 'react-native';
+import { ScrollView } from 'react-native';
 import styled from 'styled-components';
 import Card from './components/card';
 
 import cardBackround from './assets/background2.jpg';
 import reactLogo from './assets/logo-react.png';
+import avatar from './assets/avatar.jpg';
 
 export default function App() {
   return (
     <Container>
-      <TitleBar>
-        <Avatar source={require('./assets/avatar.jpg')} />
-        <Title>Welcome back</Title>
-        <Name>Mengi</Name>
-      </TitleBar>
-      <Subtitle>Continue Learning</Subtitle>
-      <Card
-        title="Styled Components"
-        image={cardBackround}
-        caption="React Native"
-        logo={reactLogo}
-        subtitle="5 of 12 sections"
-      />
+      <ScrollView>
+        <TitleBar>
+          <Avatar source={avatar} />
+          <Title>Welcome back</Title>
+          <Name>Mengi</Name>
+        </TitleBar>
+        <Subtitle>Continue Learning</Subtitle>
+        <CardWrapper horizontal showsHorizontalScrollIndicator={false}>
+          <Card
+            title="Styled Components"
+            image={cardBackround}
+            caption="React Native"
+            logo={reactLogo}
+            subtitle="5 of 12 sections"
+          />
+          <Card
+            title="Styled Components"
+            image={cardBackround}
+            caption="React Native"
+            logo={reactLogo}
+            subtitle="5 of 12 sections"
+          />
+        </CardWrapper>
+      </ScrollView>
     </Container>
   );
 }
+
+const CardWrapper = styled.ScrollView`
+  padding-bottom: 30px;
+`;
 
 const Subtitle = styled.Text`
   color: #b8bece;
