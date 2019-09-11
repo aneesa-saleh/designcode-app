@@ -1,20 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import cardBackround from '../assets/background2.jpg';
-import reactLogo from '../assets/logo-react.png';
-
 const Card = props => (
   <Container>
     <Cover>
-      <Image source={cardBackround} />
-      <Title>Styled Components</Title>
+      <Image source={props.image} />
+      <Title>{props.title}</Title>
     </Cover>
     <Content>
-      <Logo source={reactLogo} />
+      <Logo source={props.logo} />
       <Wrapper>
-        <Caption>React Native</Caption>
-        <Subtitle>5 of 12 sections</Subtitle>
+        <Caption>{props.caption}</Caption>
+        <Subtitle>{props.subtitle}</Subtitle>
       </Wrapper>
     </Content>
   </Container>

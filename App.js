@@ -3,6 +3,9 @@ import { Text } from 'react-native';
 import styled from 'styled-components';
 import Card from './components/card';
 
+import cardBackround from './assets/background2.jpg';
+import reactLogo from './assets/logo-react.png';
+
 export default function App() {
   return (
     <Container>
@@ -12,7 +15,13 @@ export default function App() {
         <Name>Mengi</Name>
       </TitleBar>
       <Subtitle>Continue Learning</Subtitle>
-      <Card />
+      <Card
+        title="Styled Components"
+        image={cardBackround}
+        caption="React Native"
+        logo={reactLogo}
+        subtitle="5 of 12 sections"
+      />
     </Container>
   );
 }
