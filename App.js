@@ -3,6 +3,7 @@ import { ScrollView, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
 import Card from './components/card';
 import { Ionicons } from '@expo/vector-icons';
+import { NotificationIcon } from './components/Icons';
 
 import cardBackround from './assets/background2.jpg';
 import reactLogo from './assets/logo-react.png';
@@ -17,11 +18,7 @@ export default function App() {
             <Avatar source={avatar} />
             <Title>Welcome back</Title>
             <Name>Mengi</Name>
-            <NotificationsIcon
-              name="ios-notifications"
-              size={32}
-              color="#4775f2"
-            />
+            <StyledNotificationIcon />
           </TitleBar>
           <Subtitle>Continue Learning</Subtitle>
           <CardWrapper horizontal showsHorizontalScrollIndicator={false}>
@@ -46,7 +43,7 @@ export default function App() {
   );
 }
 
-const NotificationsIcon = styled(Ionicons)`
+const StyledNotificationIcon = styled(NotificationIcon)`
   position: absolute;
   right: 20px;
   top: 5px;
