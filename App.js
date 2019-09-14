@@ -33,20 +33,16 @@ export default function App() {
           </LogoWrapper>
           <Subtitle>Continue Learning</Subtitle>
           <CardWrapper horizontal showsHorizontalScrollIndicator={false}>
-            <Card
-              title="Styled Components"
-              image={cardBackround}
-              caption="React Native"
-              logo={reactLogo}
-              subtitle="5 of 12 sections"
-            />
-            <Card
-              title="Styled Components"
-              image={cardBackround}
-              caption="React Native"
-              logo={reactLogo}
-              subtitle="5 of 12 sections"
-            />
+            {cards.map((card, index) => (
+              <Card
+                key={index}
+                title={card.title}
+                image={card.image}
+                caption={card.caption}
+                logo={card.logo}
+                subtitle={card.subtitle}
+              />
+            ))}
           </CardWrapper>
         </ScrollView>
       </SafeAreaView>
@@ -138,5 +134,36 @@ const logos = [
   {
     image: sketchLogo,
     text: 'Sketch'
+  }
+];
+
+const cards = [
+  {
+    title: 'React Native for Designers',
+    image: require('./assets/background11.jpg'),
+    subtitle: 'React Native',
+    caption: '1 of 12 sections',
+    logo: reactLogo
+  },
+  {
+    title: 'Styled Components',
+    image: require('./assets/background12.jpg'),
+    subtitle: 'React Native',
+    caption: '2 of 12 sections',
+    logo: reactLogo
+  },
+  {
+    title: 'Props and Icons',
+    image: require('./assets/background13.jpg'),
+    subtitle: 'React Native',
+    caption: '3 of 12 sections',
+    logo: reactLogo
+  },
+  {
+    title: 'Static Data and Loop',
+    image: require('./assets/background14.jpg'),
+    subtitle: 'React Native',
+    caption: '4 of 12 sections',
+    logo: reactLogo
   }
 ];
