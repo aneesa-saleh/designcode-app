@@ -3,6 +3,7 @@ import { ScrollView, SafeAreaView } from 'react-native';
 import styled from 'styled-components';
 import Card from './components/card';
 import { NotificationIcon } from './components/Icons';
+import Course from './components/Course';
 
 import cardBackround from './assets/background2.jpg';
 import reactLogo from './assets/logo-react.png';
@@ -28,22 +29,21 @@ export default function App() {
           </TitleBar>
           <LogoWrapper horizontal showsHorizontalScrollIndicator={false}>
             {logos.map((logo, index) => (
-              <Logo key={index} image={logo.image} text={logo.text} />
+              <Logo key={index} {...logo} />
             ))}
           </LogoWrapper>
           <Subtitle>Continue Learning</Subtitle>
           <CardWrapper horizontal showsHorizontalScrollIndicator={false}>
             {cards.map((card, index) => (
-              <Card
-                key={index}
-                title={card.title}
-                image={card.image}
-                caption={card.caption}
-                logo={card.logo}
-                subtitle={card.subtitle}
-              />
+              <Card key={index} {...card} />
             ))}
           </CardWrapper>
+          <Subtitle>Related Courses</Subtitle>
+          <CoursesWrapper>
+            {courses.map((course, index) => (
+              <Course key={index} {...course} />
+            ))}
+          </CoursesWrapper>
         </ScrollView>
       </SafeAreaView>
     </Container>
@@ -55,6 +55,11 @@ const LogoWrapper = styled.ScrollView`
   padding: 20px;
   padding-left: 10px;
   padding-top: 30px;
+`;
+
+const CoursesWrapper = styled.ScrollView`
+  /* flex-direction: row; */
+  padding: 20px;
 `;
 
 const StyledNotificationIcon = styled(NotificationIcon)`
@@ -165,5 +170,45 @@ const cards = [
     subtitle: 'React Native',
     caption: '4 of 12 sections',
     logo: reactLogo
+  }
+];
+
+const courses = [
+  {
+    title: 'Prototype in InVision Studio',
+    subtitle: '10 sections',
+    image: require('./assets/background13.jpg'),
+    logo: require('./assets/logo-studio.png'),
+    author: 'Meng To',
+    avatar: require('./assets/avatar.jpg'),
+    caption: 'Design an interactive prototype'
+  },
+  {
+    title: 'React for Designers',
+    subtitle: '12 sections',
+    image: require('./assets/background11.jpg'),
+    logo: require('./assets/logo-react.png'),
+    author: 'Meng To',
+    avatar: require('./assets/avatar.jpg'),
+    caption: 'Learn to design and code a React site'
+  },
+  {
+    title: 'Design and Code with Framer X',
+    subtitle: '10 sections',
+    image: require('./assets/background14.jpg'),
+    logo: require('./assets/logo-framerx.png'),
+    author: 'Meng To',
+    avatar: require('./assets/avatar.jpg'),
+    caption: 'Create powerful design and code components for your app'
+  },
+  {
+    title: 'Design System in Figma',
+    subtitle: '10 sections',
+    image: require('./assets/background6.jpg'),
+    logo: require('./assets/logo-figma.png'),
+    author: 'Meng To',
+    avatar: require('./assets/avatar.jpg'),
+    caption:
+      'Complete guide to designing a site using a collaborative design tool'
   }
 ];
