@@ -15,10 +15,12 @@ import swiftLogo from './assets/logo-swift.png';
 import sketchLogo from './assets/logo-sketch.png';
 
 import Logo from './components/Logo';
+import Menu from './components/Menu';
 
 export default function App() {
   return (
     <Container>
+      <Menu />
       <SafeAreaView>
         <ScrollView>
           <TitleBar>
