@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Animated, TouchableOpacity, Dimensions } from 'react-native';
+import { Animated, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 class Menu extends React.Component {
@@ -25,12 +25,16 @@ class Menu extends React.Component {
   render() {
     return (
       <AnimatedContainer top={this.state.top}>
-        <Cover></Cover>
-        <TouchableOpacity onPress={this.toggleMenu}>
+        <Cover>
+          <Image source={require('../assets/background2.jpg')} />
+          <Title>Meng To</Title>
+          <Subtitle>Designer at Design+Code</Subtitle>
+        </Cover>
+        <TouchableCloseView onPress={this.toggleMenu}>
           <CloseView>
             <Ionicons name="ios-close" size={44} color="#546bfb" />
           </CloseView>
-        </TouchableOpacity>
+        </TouchableCloseView>
         <Content></Content>
       </AnimatedContainer>
     );
@@ -53,11 +57,39 @@ const AnimatedContainer = Animated.createAnimatedComponent(Container);
 const Cover = styled.View`
   height: 142px;
   background: black;
+  justify-content: center;
+  align-items: center;
 `;
 
 const Content = styled.View`
   height: ${Menu.screenHeight};
   background: #f0f3f5;
+`;
+
+const Image = styled.Image`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
+
+const Title = styled.Text`
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+`;
+
+const Subtitle = styled.Text`
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  margin-top: 8px;
+`;
+
+TouchableCloseView = styled.TouchableOpacity`
+  position: absolute;
+  top: 120px; /* cover height - (button height / 2) */
+  left: 50%;
+  margin-left: -22px;
+  z-index: 1;
 `;
 
 const CloseView = styled.View`
@@ -66,4 +98,6 @@ const CloseView = styled.View`
   border-radius: 22px;
   justify-content: center;
   align-items: center;
+  background: white;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
 `;
