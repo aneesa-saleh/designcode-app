@@ -12,12 +12,16 @@ class Menu extends React.Component {
   };
 
   componentDidMount() {
+    this.openMenu();
+  }
+
+  openMenu = () => {
     Animated.spring(this.state.top, {
       toValue: 0
     }).start();
-  }
+  };
 
-  toggleMenu = () => {
+  closeMenu = () => {
     Animated.spring(this.state.top, {
       toValue: Menu.screenHeight
     }).start();
@@ -31,7 +35,7 @@ class Menu extends React.Component {
           <Title>Meng To</Title>
           <Subtitle>Designer at Design+Code</Subtitle>
         </Cover>
-        <TouchableCloseView onPress={this.toggleMenu}>
+        <TouchableCloseView onPress={this.closeMenu}>
           <CloseView>
             <Ionicons name="ios-close" size={44} color="#546bfb" />
           </CloseView>
