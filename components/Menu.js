@@ -10,6 +10,15 @@ function mapStateToProps(state) {
   return { action: state.action };
 }
 
+function mapDispatchToProps(dispatch) {
+  return {
+    closeMenu: () =>
+      dispatch({
+        type: 'CLOSE_MENU'
+      })
+  };
+}
+
 class Menu extends React.Component {
   static screenHeight = Dimensions.get('window').height;
 
@@ -19,6 +28,12 @@ class Menu extends React.Component {
 
   componentDidMount() {
     this.toggleMenu();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.action !== this.props.action) {
+      this.toggleMenu();
+    }
   }
 
   toggleMenu = () => {
@@ -50,7 +65,7 @@ class Menu extends React.Component {
           <Title>Meng To</Title>
           <Subtitle>Designer at Design+Code</Subtitle>
         </Cover>
-        <TouchableCloseView onPress={this.closeMenu}>
+        <TouchableCloseView onPress={this.props.closeMenu}>
           <CloseView>
             <Ionicons name="ios-close" size={44} color="#546bfb" />
           </CloseView>
@@ -65,7 +80,10 @@ class Menu extends React.Component {
   }
 }
 
-export default connect(mapStateToProps)(Menu);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Menu);
 
 const items = [
   {
