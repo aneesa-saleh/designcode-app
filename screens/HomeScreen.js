@@ -1,5 +1,6 @@
 import React from 'react';
-import { ScrollView, SafeAreaView } from 'react-native';
+import { connect } from 'react-redux';
+import { ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
 import styled from 'styled-components';
 import Card from '../components/card';
 import { NotificationIcon } from '../components/Icons';
@@ -17,7 +18,20 @@ import sketchLogo from '../assets/logo-sketch.png';
 import Logo from '../components/Logo';
 import Menu from '../components/Menu';
 
-export default class App extends React.Component {
+function mapStateToProps({ menu }) {
+  return { menu };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    openMenu: () =>
+      dispatch({
+        type: 'OPEN_MENU'
+      })
+  };
+}
+
+class HomeScreen extends React.Component {
   render() {
     return (
       <Container>
@@ -25,7 +39,9 @@ export default class App extends React.Component {
         <SafeAreaView>
           <ScrollView>
             <TitleBar>
-              <Avatar source={avatar} />
+              <TouchableAvatar onPress={this.props.openMenu}>
+                <Avatar source={avatar} />
+              </TouchableAvatar>
               <Title>Welcome back</Title>
               <Name>Mengi</Name>
               <StyledNotificationIcon />
@@ -53,6 +69,11 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(HomeScreen);
 
 const LogoWrapper = styled.ScrollView`
   flex-direction: row;
@@ -85,15 +106,18 @@ const Subtitle = styled.Text`
   text-transform: uppercase;
 `;
 
+const TouchableAvatar = styled.TouchableOpacity`
+  position: absolute;
+  top: 0;
+  left: 0;
+`;
+
 const Avatar = styled.Image`
   width: 44px;
   height: 44px;
   background: black;
   border-radius: 22px;
   margin-left: 22px;
-  position: absolute;
-  top: 0;
-  left: 0;
 `;
 
 const Container = styled.View`

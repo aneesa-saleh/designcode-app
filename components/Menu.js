@@ -6,8 +6,8 @@ import { Ionicons } from '@expo/vector-icons';
 
 import MenuItem from './MenuItem';
 
-function mapStateToProps(state) {
-  return { action: state.action };
+function mapStateToProps({ menu }) {
+  return { menu };
 }
 
 function mapDispatchToProps(dispatch) {
@@ -31,16 +31,16 @@ class Menu extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.action !== this.props.action) {
+    if (prevProps.menu !== this.props.menu) {
       this.toggleMenu();
     }
   }
 
   toggleMenu = () => {
-    const { action } = this.props;
-    if (action === 'openMenu') {
+    const { menu } = this.props;
+    if (menu === 'open') {
       this.openMenu();
-    } else if (action === 'closeMenu') {
+    } else if (menu === 'closed') {
       this.closeMenu();
     }
   };
