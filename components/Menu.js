@@ -1,8 +1,14 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { Animated, Dimensions } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
 import MenuItem from './MenuItem';
+
+function mapStateToProps(state) {
+  return { action: state.action };
+}
 
 class Menu extends React.Component {
   static screenHeight = Dimensions.get('window').height;
@@ -12,8 +18,17 @@ class Menu extends React.Component {
   };
 
   componentDidMount() {
-    this.openMenu();
+    this.toggleMenu();
   }
+
+  toggleMenu = () => {
+    const { action } = this.props;
+    if (action === 'openMenu') {
+      this.openMenu();
+    } else if (action === 'closeMenu') {
+      this.closeMenu();
+    }
+  };
 
   openMenu = () => {
     Animated.spring(this.state.top, {
@@ -50,7 +65,7 @@ class Menu extends React.Component {
   }
 }
 
-export default Menu;
+export default connect(mapStateToProps)(Menu);
 
 const items = [
   {
