@@ -47,7 +47,7 @@ class Menu extends React.Component {
 
   openMenu = () => {
     Animated.spring(this.state.top, {
-      toValue: 0
+      toValue: 54
     }).start();
   };
 
@@ -115,6 +115,8 @@ const Container = styled.View`
   height: 100%;
   z-index: 100;
   top: ${props => props.top};
+  border-radius: 10px;
+  overflow: hidden;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);

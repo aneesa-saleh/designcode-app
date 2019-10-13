@@ -64,38 +64,40 @@ class HomeScreen extends React.Component {
 
   render() {
     return (
-      <AnimatedContainer style={{ transform: [{ scale: this.state.scale }] }}>
+      <RootView>
         <Menu />
-        <SafeAreaView>
-          <ScrollView>
-            <TitleBar>
-              <TouchableAvatar onPress={this.props.openMenu}>
-                <Avatar source={avatar} />
-              </TouchableAvatar>
-              <Title>Welcome back</Title>
-              <Name>Mengi</Name>
-              <StyledNotificationIcon />
-            </TitleBar>
-            <LogoWrapper horizontal showsHorizontalScrollIndicator={false}>
-              {logos.map((logo, index) => (
-                <Logo key={index} {...logo} />
-              ))}
-            </LogoWrapper>
-            <Subtitle>Continue Learning</Subtitle>
-            <CardWrapper horizontal showsHorizontalScrollIndicator={false}>
-              {cards.map((card, index) => (
-                <Card key={index} {...card} />
-              ))}
-            </CardWrapper>
-            <Subtitle>Related Courses</Subtitle>
-            <CoursesWrapper>
-              {courses.map((course, index) => (
-                <Course key={index} {...course} />
-              ))}
-            </CoursesWrapper>
-          </ScrollView>
-        </SafeAreaView>
-      </AnimatedContainer>
+        <AnimatedContainer style={{ transform: [{ scale: this.state.scale }] }}>
+          <SafeAreaView>
+            <ScrollView>
+              <TitleBar>
+                <TouchableAvatar onPress={this.props.openMenu}>
+                  <Avatar source={avatar} />
+                </TouchableAvatar>
+                <Title>Welcome back</Title>
+                <Name>Mengi</Name>
+                <StyledNotificationIcon />
+              </TitleBar>
+              <LogoWrapper horizontal showsHorizontalScrollIndicator={false}>
+                {logos.map((logo, index) => (
+                  <Logo key={index} {...logo} />
+                ))}
+              </LogoWrapper>
+              <Subtitle>Continue Learning</Subtitle>
+              <CardWrapper horizontal showsHorizontalScrollIndicator={false}>
+                {cards.map((card, index) => (
+                  <Card key={index} {...card} />
+                ))}
+              </CardWrapper>
+              <Subtitle>Related Courses</Subtitle>
+              <CoursesWrapper>
+                {courses.map((course, index) => (
+                  <Course key={index} {...course} />
+                ))}
+              </CoursesWrapper>
+            </ScrollView>
+          </SafeAreaView>
+        </AnimatedContainer>
+      </RootView>
     );
   }
 }
@@ -104,6 +106,11 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps
 )(HomeScreen);
+
+const RootView = styled.View`
+  background: black;
+  flex: 1;
+`;
 
 const LogoWrapper = styled.ScrollView`
   flex-direction: row;
@@ -139,7 +146,7 @@ const Subtitle = styled.Text`
 const TouchableAvatar = styled.TouchableOpacity`
   position: absolute;
   top: 0;
-  left: 0;
+  left: 20px;
 `;
 
 const Avatar = styled.Image`
@@ -147,12 +154,12 @@ const Avatar = styled.Image`
   height: 44px;
   background: black;
   border-radius: 22px;
-  margin-left: 22px;
 `;
 
 const Container = styled.View`
   flex: 1;
   background-color: #f0f3f5;
+  border-radius: 10px;
 `;
 
 const AnimatedContainer = Animated.createAnimatedComponent(Container);
