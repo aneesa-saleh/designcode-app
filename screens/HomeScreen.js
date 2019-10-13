@@ -39,7 +39,8 @@ function mapDispatchToProps(dispatch) {
 
 class HomeScreen extends React.Component {
   state = {
-    scale: new Animated.Value(1)
+    scale: new Animated.Value(1),
+    opacity: new Animated.Value(1)
   };
 
   componentDidUpdate(prevProps) {
@@ -50,13 +51,23 @@ class HomeScreen extends React.Component {
 
   toggleMenu = () => {
     if (this.props.menu == 'open') {
-      Animated.spring(this.state.scale, {
-        toValue: 0.9
+      Animated.timing(this.state.scale, {
+        toValue: 0.9,
+        duration: 300,
+        easing: Easing.in()
+      }).start();
+      Animated.spring(this.state.opacity, {
+        toValue: 0.5
       }).start();
     }
 
     if (this.props.menu == 'closed') {
-      Animated.spring(this.state.scale, {
+      Animated.timing(this.state.scale, {
+        toValue: 1,
+        duration: 300,
+        easing: Easing.in()
+      }).start();
+      Animated.spring(this.state.opacity, {
         toValue: 1
       }).start();
     }
@@ -66,7 +77,12 @@ class HomeScreen extends React.Component {
     return (
       <RootView>
         <Menu />
-        <AnimatedContainer style={{ transform: [{ scale: this.state.scale }] }}>
+        <AnimatedContainer
+          style={{
+            transform: [{ scale: this.state.scale }],
+            opacity: this.state.opacity
+          }}
+        >
           <SafeAreaView>
             <ScrollView>
               <TitleBar>
