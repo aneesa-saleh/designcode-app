@@ -5,7 +5,8 @@ import {
   SafeAreaView,
   TouchableOpacity,
   Animated,
-  Easing
+  Easing,
+  StatusBar
 } from 'react-native';
 import styled from 'styled-components';
 import Card from '../components/card';
@@ -43,6 +44,10 @@ class HomeScreen extends React.Component {
     opacity: new Animated.Value(1)
   };
 
+  componentDidMount() {
+    StatusBar.setBarStyle('dark-content', true);
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.menu !== this.props.menu) {
       this.toggleMenu();
@@ -51,26 +56,38 @@ class HomeScreen extends React.Component {
 
   toggleMenu = () => {
     if (this.props.menu == 'open') {
-      Animated.timing(this.state.scale, {
-        toValue: 0.9,
-        duration: 300,
-        easing: Easing.in()
-      }).start();
-      Animated.spring(this.state.opacity, {
-        toValue: 0.5
-      }).start();
+      this.openMenu();
     }
 
     if (this.props.menu == 'closed') {
-      Animated.timing(this.state.scale, {
-        toValue: 1,
-        duration: 300,
-        easing: Easing.in()
-      }).start();
-      Animated.spring(this.state.opacity, {
-        toValue: 1
-      }).start();
+      this.closeMenu();
     }
+  };
+
+  openMenu = () => {
+    Animated.timing(this.state.scale, {
+      toValue: 0.9,
+      duration: 300,
+      easing: Easing.in()
+    }).start();
+    Animated.spring(this.state.opacity, {
+      toValue: 0.5
+    }).start();
+
+    StatusBar.setBarStyle('light-content', true);
+  };
+
+  closeMenu = () => {
+    Animated.timing(this.state.scale, {
+      toValue: 1,
+      duration: 300,
+      easing: Easing.in()
+    }).start();
+    Animated.spring(this.state.opacity, {
+      toValue: 1
+    }).start();
+
+    StatusBar.setBarStyle('dark-content', true);
   };
 
   render() {
