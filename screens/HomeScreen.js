@@ -1,6 +1,12 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { ScrollView, SafeAreaView, TouchableOpacity } from 'react-native';
+import {
+  ScrollView,
+  SafeAreaView,
+  TouchableOpacity,
+  Animated,
+  Easing
+} from 'react-native';
 import styled from 'styled-components';
 import Card from '../components/card';
 import { NotificationIcon } from '../components/Icons';
@@ -32,9 +38,33 @@ function mapDispatchToProps(dispatch) {
 }
 
 class HomeScreen extends React.Component {
+  state = {
+    scale: new Animated.Value(1)
+  };
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.menu !== this.props.menu) {
+      this.toggleMenu();
+    }
+  }
+
+  toggleMenu = () => {
+    if (this.props.menu == 'open') {
+      Animated.spring(this.state.scale, {
+        toValue: 0.9
+      }).start();
+    }
+
+    if (this.props.menu == 'closed') {
+      Animated.spring(this.state.scale, {
+        toValue: 1
+      }).start();
+    }
+  };
+
   render() {
     return (
-      <Container>
+      <AnimatedContainer style={{ transform: [{ scale: this.state.scale }] }}>
         <Menu />
         <SafeAreaView>
           <ScrollView>
@@ -65,7 +95,7 @@ class HomeScreen extends React.Component {
             </CoursesWrapper>
           </ScrollView>
         </SafeAreaView>
-      </Container>
+      </AnimatedContainer>
     );
   }
 }
@@ -124,6 +154,8 @@ const Container = styled.View`
   flex: 1;
   background-color: #f0f3f5;
 `;
+
+const AnimatedContainer = Animated.createAnimatedComponent(Container);
 
 const Title = styled.Text`
   font-size: 16px;
